@@ -5,6 +5,7 @@ import { Button, ButtonGroup } from 'react-bootstrap'
 import Deck from '../cards/deck'
 import Cards from '../componenets/cards.component'
 
+import './main.css'
 export default class Main extends Component {
 
 	constructor(props) {
@@ -26,14 +27,28 @@ export default class Main extends Component {
 		}
 	}
 
+	drawThree = () => {
+		this.drawX(3)
+	}
+
+	drawFive = () => {
+		this.drawX(5)
+	}
+
+	drawX = (x) => {
+		this.shuffle()
+		let col = [x]
+		for (let i = 0; i < x; i += 1) {
+			col.push(this.state.deck.draw())
+		}
+		this.setState({ collection: col })
+	}
+
 	shuffle = () => {
-		this.setState({ deck: new Deck().shuffle() })
+		this.setState({ deck: new Deck().shuffle(), collection: [1] })
 	}
 
 	render() {
-
-		// let col = this.state.collection
-
 		return(
 			<div>
 				<ButtonGroup>
@@ -41,6 +56,8 @@ export default class Main extends Component {
 				</ButtonGroup>
 				<ButtonGroup>
 					<Button bsStyle="primary" onClick={this.drawSingle}>single</Button>
+					<Button bsStyle="primary" onClick={this.drawThree}>three</Button>
+					<Button bsStyle="primary" onClick={this.drawFive}>five</Button>
 				</ButtonGroup>
 				<Cards collection={ this.state.collection } >
 				</Cards>

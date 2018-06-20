@@ -5,12 +5,16 @@ import './styles.css'
 export default class Cards extends Component {
 	constructor(props) {
 		super(props)
-		this.state = { collection: this.props.collection }
+		let col = this.props.collection
+		let layout = col.shift()
+		this.state = { collection: col, layout: layout }
 	}
 
 	componentWillReceiveProps(nextProps) {
 		if (nextProps.collection !== this.props.collection) {
-			this.setState({ collection: nextProps.collection })
+			let col = nextProps.collection
+			let layout = col.shift()
+			this.setState({ collection: col, layout: layout })
 		}
 	}
 
@@ -22,14 +26,11 @@ export default class Cards extends Component {
 
 	getImgComponents = (collection) => {
 		return (collection.map((card, index) => {
-
 			<img src={card.getImgSrc()} key={index} />
 		}))
 	}
 	
 	render() {
-		console.log('render')
-		// console.log(this.getImgComponents(this.state.collection))
 		return(
 			<div className='cards'>
 			{ this.state.collection.map((card, index) => 

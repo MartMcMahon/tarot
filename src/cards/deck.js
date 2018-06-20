@@ -131,7 +131,7 @@ class Card {
 		let suit = this.getSuit()
 		if (this.suit === 1) suit = 'Pents'
 		if (this.suit === 4) {
-			return img[Suit[this.suit]][this.value]
+			return '/assets/cards/' + img[Suit[this.suit]][this.value]
 		}
 			return '/assets/cards/' + suit + ('0' + (this.value +1)).slice(-2) + '.jpg'
 	}
